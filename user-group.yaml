@@ -1,0 +1,19 @@
+- hosts: servers
+  remote_user: shalligoel
+  become: true
+
+  tasks:
+  - name: create/check devops group
+    group:
+      name: devops
+      state: present
+  - name: create/check devops user in devops group
+    user:
+      name: devops
+      state: present
+      uid: 2001
+      group: devops
+  - name: install nginx servers
+    apt: 
+      name: [nginx]
+      state: latest
